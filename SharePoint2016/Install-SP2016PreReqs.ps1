@@ -7,7 +7,7 @@ function Start-Unzip
 }
 
 $SharePoint2016Path = "C:\software\SP2016PreReqs\"
-$SharePoint2016InstallPath = "E:\"
+$SharePoint2016InstallPath = "F:\"
 
 Start-BitsTransfer -Source https://download.microsoft.com/download/F/E/D/FEDB200F-DE2A-46D8-B661-D019DFE9D470/ENU/x64/sqlncli.msi -Destination $SharePoint2016Path
 Start-BitsTransfer -Source https://download.microsoft.com/download/5/7/2/57249A3A-19D6-4901-ACCE-80924ABEB267/ENU/x64/msodbcsql.msi -Destination $SharePoint2016Path
@@ -16,7 +16,7 @@ Start-BitsTransfer -Source https://download.microsoft.com/download/B/9/D/B9D6E01
 Start-BitsTransfer -Source https://download.microsoft.com/download/A/6/7/A678AB47-496B-4907-B3D4-0A2D280A13C0/WindowsServerAppFabricSetup_x64.exe -Destination $SharePoint2016Path
 Start-BitsTransfer -Source https://download.microsoft.com/download/F/1/0/F1093AF6-E797-4CA8-A9F6-FC50024B385C/AppFabric-KB3092423-x64-ENU.exe -Destination $SharePoint2016Path
 Start-BitsTransfer -Source https://download.microsoft.com/download/0/1/D/01D06854-CA0C-46F1-ADBA-EBF86010DCC6/rtm/MicrosoftIdentityExtensions-64.msi -Destination $SharePoint2016Path
-Start-BitsTransfer -Source https://download.microsoft.com/download/9/1/D/91DA8796-BE1D-46AF-8489-663AB7811517/setup_msipc_x64.msi  -Destination $SharePoint2016Path
+Start-BitsTransfer -Source https://download.microsoft.com/download/3/C/F/3CF781F5-7D29-4035-9265-C34FF2369FA2/setup_msipc_x64.exe  -Destination $SharePoint2016Path
 Start-BitsTransfer -Source https://download.microsoft.com/download/8/F/9/8F93DBBD-896B-4760-AC81-646F61363A6D/WcfDataServices.exe -Destination $SharePoint2016Path
 Start-BitsTransfer -Source https://download.microsoft.com/download/2/8/7/2870C339-3C77-49CF-8DDF-AD6189AB8597/NDP453-KB2969351-x86-x64-AllOS-ENU.exe -Destination $SharePoint2016Path
 Start-BitsTransfer -Source https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x64.exe -Destination $SharePoint2016Path
@@ -27,7 +27,7 @@ Move-Item -Path "$($SharePoint2016Path)Microsoft Sync Framework\Synchronization.
 if($?)
 {
     Remove-Item -Force -Recurse -Path "$($SharePoint2016Path)Microsoft Sync Framework"
-    Remove-Item -Force -Path "$($SharePoint2016Path)SyncSetup_en.x64.zip"-
+    Remove-Item -Force -Path "$($SharePoint2016Path)SyncSetup_en.x64.zip"
 }
 
 Remove-Item -Force -Recurse -Path "$($SharePoint2016Path)DotNetFx"
