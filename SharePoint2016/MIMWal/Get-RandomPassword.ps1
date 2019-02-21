@@ -1,4 +1,4 @@
-function Generate-RandomPassword
+function Get-RandomPassword
 {
 	Param
 	(
