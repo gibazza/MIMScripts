@@ -30,7 +30,7 @@ $strSID.GetBinaryForm($bytes, 0)
 # Create the resource
 $o = New-Resource -ObjectType Person
 $o.AccountName = $username
-$o.Domain = $domain
+$o.Domain = $domainName
 $o.DisplayName = $displayName
 $o.ObjectSID = $bytes
 Save-Resource $o
