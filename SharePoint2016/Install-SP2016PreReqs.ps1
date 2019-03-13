@@ -7,7 +7,11 @@ function Start-Unzip
 }
 
 $SharePoint2016Path = "C:\software\SP2016PreReqs\"
-$SharePoint2016InstallPath = "F:\"
+$SharePoint2016InstallPath = "E:\"
+
+if(!(Test-Path -Path $SharePoint2016Path )){
+    New-Item -ItemType directory -Path $SharePoint2016Path
+}
 
 Start-BitsTransfer -Source https://download.microsoft.com/download/F/E/D/FEDB200F-DE2A-46D8-B661-D019DFE9D470/ENU/x64/sqlncli.msi -Destination $SharePoint2016Path
 Start-BitsTransfer -Source https://download.microsoft.com/download/5/7/2/57249A3A-19D6-4901-ACCE-80924ABEB267/ENU/x64/msodbcsql.msi -Destination $SharePoint2016Path
