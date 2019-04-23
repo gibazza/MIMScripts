@@ -1,29 +1,54 @@
+<#
+.Synopsis
+   Executes a POST to a RESTAPI
+.DESCRIPTION
+   Takes headers and body parameters as a hastable and exectues a POST call against the passed URI
+.EXAMPLE
+   Invoke-RESTPOST -headers @{"Authorization" = "Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=="} -uri https://someserver.com/api/update -body @{"email" = "a@b.com";"firstname" = "Adam"}
+.EXAMPLE
+    Invoke-RESTPOST $headers $url $params
+   
+#>
+[CmdletBinding()]
+[OutputType([int])]
+    
 PARAM(
-    [parameter(Mandatory = $true, Position = 0)] [System.Collections.Hashtable] $headers,
-    [parameter(Mandatory = $true, Position = 1)] [string] $uri,
-    [parameter(Mandatory = $true, Position = 2)] [string] $jsonBody
+    [parameter(Mandatory = $true,
+        ValueFromPipelineByPropertyName=$true,
+        Position = 0)] 
+    [System.Collections.Hashtable] $headers,
+
+    [parameter(Mandatory = $true, 
+        ValueFromPipelineByPropertyName=$true,
+        Position = 1)] 
+    [string] $uri,
+
+    [parameter(Mandatory = $true, 
+        ValueFromPipelineByPropertyName=$true,
+        Position = 2)] 
+    [System.Collections.Hashtable] $body
 )
 
-Set-Variable -Name contentType -Scope Global -Value "application/json" -Option Constant
-#Set-Variable -Name pSUtility -Scope Global -Value "Microsoft.PowerShell.Management"
-[string] $powershellRepresentation
-[bool] $validJson
+Set-Variable -Name contentType -Scope Script -Value "application/json" -Option Constant
+[string] $jSONBody | Out-Null
+[bool] $validJSON | Out-Null
 
 try {
-    $powershellRepresentation = ConvertFrom-Json $jsonBody -ErrorAction Stop;
+    $jSONBody = ConvertTo-Json $body -ErrorAction Stop
     $validJson = $true;
-} catch {
+}
+catch {
     $validJson = $false;
 }
 
 if ($validJson) {
     try {
-        $result = Invoke-WebRequest -Uri $url -Method Post -Headers $headers -Body ($params|ConvertTo-Json) -UseBasicParsing -ContentType $contentType | ConvertFrom-Json    
+        $result = Invoke-WebRequest -Uri $url -Method Post -Headers $headers -Body $jSONBody -UseBasicParsing -ContentType $contentType | ConvertFrom-Json    
     }
     catch {
         $result = $_.Exception.Response.StatusCode.Value__
     }
-    if (!$null -eq $result.result){
+    if (!$null -eq $result.result) {
         return 200
     }
     else {
@@ -31,5 +56,5 @@ if ($validJson) {
     }
 }
 else {
-    
+    Throw "Body does not contain valid JSON."
 }
