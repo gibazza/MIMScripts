@@ -61,4 +61,5 @@ New-SPSite $w.url -OwnerAlias $ownerAccount -Name $webAppName -Template "STS#0"
 $contentService = [Microsoft.SharePoint.Administration.SPWebService]::ContentService;
 $contentService.ViewStateOnServer = $false;
 $contentService.Update();
+Get-SPTimerJob hourly-all-sptimerservice-health-analysis-job | disable-SPTimerJob
 iisreset
