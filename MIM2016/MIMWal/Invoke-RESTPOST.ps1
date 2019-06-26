@@ -1,10 +1,10 @@
 <#
 .Synopsis
-   Executes a POST to a RESTAPI
+    Executes a POST to a RESTAPI
 .DESCRIPTION
-   Takes headers and body parameters as a hastable and exectues a POST call against the passed URI
+    Takes headers and body parameters as a hastable and exectues a POST call against the passed URI
 .EXAMPLE
-   Invoke-RESTPOST -headers @{"Authorization" = "Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=="} -uri https://someserver.com/api/update -body @{"email" = "a@b.com";"firstname" = "Adam"}
+    Invoke-RESTPOST -headers @{"Authorization" = "Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=="} -uri https://someserver.com/api/update -body @{"email" = "a@b.com";"firstname" = "Adam"}
 .EXAMPLE
     Invoke-RESTPOST $headers $url $params
    
